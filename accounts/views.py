@@ -9,7 +9,7 @@ from .models import recipe,gen_ins,mother_recipe,mother_ins
 def home(request):
     return render(request,'accounts/index.html')
 def ourword(request):
-    return render(request,'accounts/ourword.html')
+    return render(request,'accounts/fakeourword.html')
 def about(request):
     return render(request,'accounts/about2.html')
 def features(request):
@@ -42,7 +42,10 @@ def usermain(request):
             else:
                 category = "Healthy"
         else:
-            category = "Unknown gender"
+            if bmi < 18.5:
+                category = "Underweight"
+            else:
+                category = "Healthy"
         object_1=recipe.objects.filter(district=district,age=age)
         object_2=gen_ins.objects.filter(age=age)
         for obj in object_2:
